@@ -11,6 +11,7 @@ def generate_question_answer_pairs(book_model: BookModel, output_file: str, inde
 
     :param book_model: The book model
     :param output_file: The output file
+    :param indent: Indention of th generated json content
     """
 
     with open(output_file, "w", encoding="utf-8") as output:
@@ -55,7 +56,7 @@ def main():
     parser.add_argument("--json_file", help="The filepath of the input JSON file.")
     parser.add_argument("--output_file", help="The filepath to the output text or json file.")
     parser.add_argument("--indent", default=None, help="Use indention for the JSON output. 0 not indention, "
-                                                    "number of spaces otherwise")
+                                                       "number of spaces otherwise")
     args = parser.parse_args()
 
     with open(args.json_file, "r", encoding="utf-8") as f:
