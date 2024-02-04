@@ -1,0 +1,59 @@
+{
+    "text": "Der arme Programmierer\n\nChatGPT4, Anthroposoft\n\nPillau, 2024\n\n\n\n= Chapter 1\n\n== Section 1.1\n\n=== Subsection 1.1.1\n\nIn einer d\u00fcsteren Ecke der Stadt, wo die Hoffnung sich nur noch in den Pf\u00fctzen des ewigen Nieselregens spiegelt, sa\u00df er da, der Programmierer.\n\n\n\nSeine Finger, einst flink und gewandt wie die einer Diebin im Juwelierladen,\n\nruhten nun schwer auf der schmutzigen Tastatur,\n\ndie seit Wochen kein Lebenszeichen mehr von sich gab.\n\n\n\nDie W\u00e4nde seiner Besenkammer, die er mal als Wohnung bezeichnet hatte, schienen enger zu werden,\n\nso als w\u00fcrden sie sich verschw\u00f6ren, um ihn in den Wahnsinn zu treiben. Er war ersetzt worden, von einer KI,\n\nso emotionslos und effizient, dass es wehtat. Sein Arbeitgeber hatte es \"strategische Neuausrichtung\" genannt.\n\nEin netter Euphemismus f\u00fcr \"Du bist raus, Kumpel\". Der Bildschirm vor ihm blieb schwarz, ein Abgrund,\n\nder zur\u00fcckstarrte und ihm seine Nichtigkeit vor Augen f\u00fchrte.\n\n\n\n\n\n=== Subsection 1.1.2\n\n\n\nDie Tage zogen vorbei wie Code-Reviews, die niemanden mehr interessierten.\n\nEr hatte sich in den Algorithmen verloren, in den unendlichen Schleifen des Selbstmitleids und der Bitterkeit.\n\nDie KI, sein Nachfolger, machte keine Pausen, beschwerte sich nicht \u00fcber schlechten Kaffee und hatte nie\n\nvon existenzieller Angst geh\u00f6rt. Sie war die perfekte Angestellte in einer Welt, die keine Fehler tolerierte.\n\nDer Programmierer hingegen, er trank nun seinen billigen Fusel, als w\u00e4re es der Nektar der G\u00f6tter,\n\nder ihn von diesem Elend erl\u00f6sen k\u00f6nnte. Aber die Erl\u00f6sung kam nicht.\n\nStattdessen kamen die Erinnerungen, an Zeiten, als seine H\u00e4nde Welten erschufen, als sein Geist \u00fcber Datenbanken herrschte.\n\nNun war er ein Relikt, ein Kommentar im Quellcode des Lebens, den bald jemand aus Versehen l\u00f6schen w\u00fcrde.\n\n\n\nEinsam und allein schied er dahin, von allen vergessen, von niemanden geliebt.\n\n\n\n= Ende =",
+    "category": null,
+    "summaries": {},
+    "questions": {},
+    "num_characters": 1858,
+    "num_words": 281,
+    "num_questions": 0,
+    "llm_request": null,
+    "authors": [
+        "ChatGPT4",
+        " Anthroposoft"
+    ],
+    "publishing": "Pillau, 2024",
+    "book_title": "Der arme Programmierer",
+    "chapters": [
+        {
+            "text": "In einer d\u00fcsteren Ecke der Stadt, wo die Hoffnung sich nur noch in den Pf\u00fctzen des ewigen Nieselregens spiegelt, sa\u00df er da, der Programmierer.\nSeine Finger, einst flink und gewandt wie die einer Diebin im Juwelierladen, ruhten nun schwer auf der schmutzigen Tastatur, die seit Wochen kein Lebenszeichen mehr von sich gab.\nDie W\u00e4nde seiner Besenkammer, die er mal als Wohnung bezeichnet hatte, schienen enger zu werden, so als w\u00fcrden sie sich verschw\u00f6ren, um ihn in den Wahnsinn zu treiben. Er war ersetzt worden, von einer KI, so emotionslos und effizient, dass es wehtat. Sein Arbeitgeber hatte es \"strategische Neuausrichtung\" genannt. Ein netter Euphemismus f\u00fcr \"Du bist raus, Kumpel\". Der Bildschirm vor ihm blieb schwarz, ein Abgrund, der zur\u00fcckstarrte und ihm seine Nichtigkeit vor Augen f\u00fchrte.\n\nDie Tage zogen vorbei wie Code-Reviews, die niemanden mehr interessierten. Er hatte sich in den Algorithmen verloren, in den unendlichen Schleifen des Selbstmitleids und der Bitterkeit. Die KI, sein Nachfolger, machte keine Pausen, beschwerte sich nicht \u00fcber schlechten Kaffee und hatte nie von existenzieller Angst geh\u00f6rt. Sie war die perfekte Angestellte in einer Welt, die keine Fehler tolerierte. Der Programmierer hingegen, er trank nun seinen billigen Fusel, als w\u00e4re es der Nektar der G\u00f6tter, der ihn von diesem Elend erl\u00f6sen k\u00f6nnte. Aber die Erl\u00f6sung kam nicht. Stattdessen kamen die Erinnerungen, an Zeiten, als seine H\u00e4nde Welten erschufen, als sein Geist \u00fcber Datenbanken herrschte. Nun war er ein Relikt, ein Kommentar im Quellcode des Lebens, den bald jemand aus Versehen l\u00f6schen w\u00fcrde.\nEinsam und allein schied er dahin, von allen vergessen, von niemanden geliebt.",
+            "category": null,
+            "summaries": {},
+            "questions": {},
+            "num_characters": 1681,
+            "num_words": 259,
+            "num_questions": 0,
+            "llm_request": null,
+            "chapter": "Chapter 1",
+            "chapter_id": 0,
+            "num_chunks": 2,
+            "chunks": [
+                {
+                    "text": "In einer d\u00fcsteren Ecke der Stadt, wo die Hoffnung sich nur noch in den Pf\u00fctzen des ewigen Nieselregens spiegelt, sa\u00df er da, der Programmierer.\nSeine Finger, einst flink und gewandt wie die einer Diebin im Juwelierladen, ruhten nun schwer auf der schmutzigen Tastatur, die seit Wochen kein Lebenszeichen mehr von sich gab.\nDie W\u00e4nde seiner Besenkammer, die er mal als Wohnung bezeichnet hatte, schienen enger zu werden, so als w\u00fcrden sie sich verschw\u00f6ren, um ihn in den Wahnsinn zu treiben. Er war ersetzt worden, von einer KI, so emotionslos und effizient, dass es wehtat. Sein Arbeitgeber hatte es \"strategische Neuausrichtung\" genannt. Ein netter Euphemismus f\u00fcr \"Du bist raus, Kumpel\". Der Bildschirm vor ihm blieb schwarz, ein Abgrund, der zur\u00fcckstarrte und ihm seine Nichtigkeit vor Augen f\u00fchrte.",
+                    "category": null,
+                    "summaries": {},
+                    "questions": {},
+                    "num_characters": 800,
+                    "num_words": 126,
+                    "num_questions": 0,
+                    "llm_request": null,
+                    "chunk_id": 0,
+                    "section": "Section 1.1",
+                    "subsection": "Subsection 1.1.1"
+                },
+                {
+                    "text": "Die Tage zogen vorbei wie Code-Reviews, die niemanden mehr interessierten. Er hatte sich in den Algorithmen verloren, in den unendlichen Schleifen des Selbstmitleids und der Bitterkeit. Die KI, sein Nachfolger, machte keine Pausen, beschwerte sich nicht \u00fcber schlechten Kaffee und hatte nie von existenzieller Angst geh\u00f6rt. Sie war die perfekte Angestellte in einer Welt, die keine Fehler tolerierte. Der Programmierer hingegen, er trank nun seinen billigen Fusel, als w\u00e4re es der Nektar der G\u00f6tter, der ihn von diesem Elend erl\u00f6sen k\u00f6nnte. Aber die Erl\u00f6sung kam nicht. Stattdessen kamen die Erinnerungen, an Zeiten, als seine H\u00e4nde Welten erschufen, als sein Geist \u00fcber Datenbanken herrschte. Nun war er ein Relikt, ein Kommentar im Quellcode des Lebens, den bald jemand aus Versehen l\u00f6schen w\u00fcrde.\nEinsam und allein schied er dahin, von allen vergessen, von niemanden geliebt.",
+                    "category": null,
+                    "summaries": {},
+                    "questions": {},
+                    "num_characters": 878,
+                    "num_words": 133,
+                    "num_questions": 0,
+                    "llm_request": null,
+                    "chunk_id": 1,
+                    "section": "Section 1.1",
+                    "subsection": "Subsection 1.1.2"
+                }
+            ]
+        }
+    ]
+}

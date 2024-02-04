@@ -1,0 +1,34 @@
+Der arme Programmierer
+ChatGPT4, Anthroposoft
+Pillau, 2024
+
+= Chapter 1
+== Section 1.1
+=== Subsection 1.1.1
+In einer düsteren Ecke der Stadt, wo die Hoffnung sich nur noch in den Pfützen des ewigen Nieselregens spiegelt, saß er da, der Programmierer.
+
+Seine Finger, einst flink und gewandt wie die einer Diebin im Juwelierladen,
+ruhten nun schwer auf der schmutzigen Tastatur,
+die seit Wochen kein Lebenszeichen mehr von sich gab.
+
+Die Wände seiner Besenkammer, die er mal als Wohnung bezeichnet hatte, schienen enger zu werden,
+so als würden sie sich verschwören, um ihn in den Wahnsinn zu treiben. Er war ersetzt worden, von einer KI,
+so emotionslos und effizient, dass es wehtat. Sein Arbeitgeber hatte es "strategische Neuausrichtung" genannt.
+Ein netter Euphemismus für "Du bist raus, Kumpel". Der Bildschirm vor ihm blieb schwarz, ein Abgrund,
+der zurückstarrte und ihm seine Nichtigkeit vor Augen führte.
+
+
+=== Subsection 1.1.2
+
+Die Tage zogen vorbei wie Code-Reviews, die niemanden mehr interessierten.
+Er hatte sich in den Algorithmen verloren, in den unendlichen Schleifen des Selbstmitleids und der Bitterkeit.
+Die KI, sein Nachfolger, machte keine Pausen, beschwerte sich nicht über schlechten Kaffee und hatte nie
+von existenzieller Angst gehört. Sie war die perfekte Angestellte in einer Welt, die keine Fehler tolerierte.
+Der Programmierer hingegen, er trank nun seinen billigen Fusel, als wäre es der Nektar der Götter,
+der ihn von diesem Elend erlösen könnte. Aber die Erlösung kam nicht.
+Stattdessen kamen die Erinnerungen, an Zeiten, als seine Hände Welten erschufen, als sein Geist über Datenbanken herrschte.
+Nun war er ein Relikt, ein Kommentar im Quellcode des Lebens, den bald jemand aus Versehen löschen würde.
+
+Einsam und allein schied er dahin, von allen vergessen, von niemanden geliebt.
+
+= Ende =

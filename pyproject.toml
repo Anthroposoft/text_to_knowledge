@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "text_to_knowledge"
+version = "0.1.0"
+description = "A set of tools to augment books with summaries, question-answer pairs, keywords and topics"
+authors = ["Natalia Gebbert <anthroposoft@mail.ru>"]
+maintainers = ["Natalia Gebbert <anthroposoft@mail.ru>"]
+license = "GPL3"
+readme = "README.md"
+homepage = "https://github.com/Anthroposoft/text_to_knowledge"
+repository = "https://github.com/Anthroposoft/text_to_knowledge"
+keywords = ["augmentation", "LLM"]
+include = ["LICENSE", "AUTHORS", "scripts/", "testing/", "prompt_configs/"]
+packages = [
+    { include = "ttk", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "2.5.3"
+openai = "1.8.0"
+python-dotenv = "1.0.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+
+[tool.poetry.scripts]
+books_to_json = "ttk.books_to_json:main"
+augment_books = "ttk.augment_books:main"
+extract_qa_pairs = "ttk.generate_training_data:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
