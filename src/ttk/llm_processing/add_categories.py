@@ -16,7 +16,7 @@ def add_categories(book: BookModel, config: ConfigBaseModel, file_path: str, sav
             if chunk.category:
                 print(file_path, "Categories exist", chapter.chapter, "chunk", chunk.chunk_id)
                 continue
-            print("Adding categories to chunk", chunk.chunk_id, "of chapter", chapter.chapter)
+            print("Book:", book.book_title," Adding categories to chunk", chunk.chunk_id, "of chapter", chapter.chapter)
 
             system_text = config.system_prompt
             user_text = config.user_prompt.format(chunk_text=chunk.text)
@@ -26,7 +26,7 @@ def add_categories(book: BookModel, config: ConfigBaseModel, file_path: str, sav
             try:
                 content = request_llm(openai_client=openai_client, config=config, messages=messages)
                 if not content:
-                    print(file_path, "Chapter:", chapter.chapter, " Chunk:", chunk.chunk_id, "No content!!")
+                    print("Book:", book.book_title, "Chapter:", chapter.chapter, " Chunk:", chunk.chunk_id, "No content!!")
                     continue
                 llm_request = LLMRequestModel(system=system_text, user=user_text, assistant=content)
                 chunk.category = CategoryModel.model_validate(json.loads(extract_json_from_text(content)))

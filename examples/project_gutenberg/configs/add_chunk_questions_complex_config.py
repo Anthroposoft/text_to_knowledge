@@ -12,7 +12,7 @@ Ensure that you always adhere to the user's instructions.
 """
 
 QUESTION_TEMPLATE = u"""
-Your task involves the analysis of a text and the creation of a complex questions. 
+Your task involves the analysis of a text and the creation of complex questions. 
 The text for analysis is a paragraph among many from a chapter of a book. 
 In addition to the text under analysis, you have access to preceding paragraphs (if they exist)
 of the chapter to clarify the context of the paragraph being analyzed. 
