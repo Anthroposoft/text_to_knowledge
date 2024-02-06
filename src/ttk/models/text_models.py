@@ -203,9 +203,21 @@ class ListOfTextResponseModel(BaseModel):
 
 
 class QuestionAnswerTrainingData(BaseModel):
-    """Model to store the response from the LLM when it creates categories"""
+    """Model to store the response from the LLM when it creates question/answer pairs"""
+    original_text: str = ""
     question: str = ""
     answer: str = ""
+    categories: List[str] = []
+    book_title: str = ""
+    chapter: str = ""
+    authors: List[str] = []
+    typ: str = ""  # Can be a chunk, chapter or book
+
+
+class SummariesTrainingData(BaseModel):
+    """Model to store the response from the LLM when it creates categories"""
+    summary: str = ""
+    original_text: str = ""
     categories: List[str] = []
     book_title: str = ""
     chapter: str = ""

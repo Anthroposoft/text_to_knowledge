@@ -26,7 +26,7 @@ pytest = "*"
 [tool.poetry.scripts]
 books_to_json = "ttk.books_to_json:main"
 augment_books = "ttk.augment_books:main"
-extract_qa_pairs = "ttk.generate_training_data:main"
+extract_knowledge = "ttk.generate_training_data:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
