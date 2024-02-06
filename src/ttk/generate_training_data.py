@@ -71,7 +71,7 @@ def generate_summary_output(book_model: BookModel, output_file: str, indent: Opt
                     continue
                 print(f"Write summary for chapter {chapter.chapter}, chunk {chunk.chunk_id}")
                 extract_summaries_with_metadata(book_model=book_model, chapter=chapter, summaries=chunk.summaries,
-                                                original_text=chunk.text, output=output, category=chapter.category,
+                                                original_text=chunk.text, output=output, category=chunk.category,
                                                 indent=indent, typ="chunk")
             if not chapter.summaries:
                 continue
