@@ -8,7 +8,7 @@ from ttk.utils import request_llm, log_exception
 
 
 def add_chunk_answers_to_questions(book: BookModel, config: QuestionAnsweringChunkConfigModel, file_path: str,
-                                   save_to_file: bool = True):
+                                   save_to_file: bool = True, save_llm_request: bool = False):
     # Create the OpenAI client with config specific api key and url. The api key
     # read by the config Class and is not stored in the config
     openai_client = OpenAI(api_key=config.api_key, base_url=config.url)
@@ -44,7 +44,7 @@ def add_chunk_answers_to_questions(book: BookModel, config: QuestionAnsweringChu
                                           f"chunk: {chunk.chunk_id}")
                             continue
                         process_answers(book, config, content, file_path, question, save_to_file, system_text,
-                                        user_text)
+                                        user_text, save_llm_request)
                         message = f"Book: {book.book_title}, Chapter: {chapter.chapter}, " \
                                   f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
                                   f"chunk {chunk.chunk_id + 1}/{len(chapter.chunks)} " \

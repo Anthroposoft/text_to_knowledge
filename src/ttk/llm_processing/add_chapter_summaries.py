@@ -9,7 +9,7 @@ from ttk.utils import request_llm, log_exception
 
 
 def add_chapter_summaries(book: BookModel, config: SummaryChunkConfigModel, file_path: str,
-                          save_to_file: bool = True):
+                          save_to_file: bool = True, save_llm_request: bool = False):
     """This method will add a detailed summary to the chapters of a book, make sure that the provided configuration
     describes the summary generation correctly and includes required format strings and the JSON output description
 
@@ -47,7 +47,7 @@ def add_chapter_summaries(book: BookModel, config: SummaryChunkConfigModel, file
                     continue
                 process_summary(book=book, config=config, content=content, file_path=file_path,
                                 save_to_file=save_to_file, sum_meta_model=sum_meta_model, system_text=system_text,
-                                user_text=user_text)
+                                user_text=user_text, save_llm_request=save_llm_request)
                 print(file_path, "Chapter:", chapter.chapter, "summary ", idx, "added")
             except Exception as e:
                 log_exception(book=book, chapter=chapter, chunk=None, content=content, e=e, file_path=file_path,

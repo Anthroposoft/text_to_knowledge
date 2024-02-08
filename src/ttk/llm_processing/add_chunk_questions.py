@@ -7,7 +7,8 @@ from ttk.models.config_models import QuestionChunkConfigModel
 from ttk.utils import request_llm, log_exception, check_create_previous_chunks_questions
 
 
-def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_path: str, save_to_file: bool = True):
+def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_path: str,
+                        save_to_file: bool = True, save_llm_request: bool = False):
     # Create the OpenAI client with config specific api key and url. The api key
     # read by the config Class and is not stored in the config
     openai_client = OpenAI(api_key=config.api_key, base_url=config.url)
@@ -52,7 +53,7 @@ def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_
                                                   content=content, file_path=file_path,
                                                   quest_meta_model=quest_meta_model,
                                                   save_to_file=save_to_file, system_text=system_text,
-                                                  user_text=user_text)
+                                                  user_text=user_text, save_llm_request=save_llm_request)
                 message = f"Book: {book.book_title}, Chapter: {chapter.chapter} " \
                           f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
                           f"chunk {chunk.chunk_id + 1}/{len(chapter.chunks)} " \

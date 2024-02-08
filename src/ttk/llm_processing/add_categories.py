@@ -6,7 +6,8 @@ from ttk.models.config_models import ConfigBaseModel
 from ttk.utils import extract_json_from_text, setup_logging, request_llm, log_exception, save_book_to_file
 
 
-def add_categories(book: BookModel, config: ConfigBaseModel, file_path: str, save_to_file: bool = True):
+def add_categories(book: BookModel, config: ConfigBaseModel, file_path: str, save_to_file: bool = True,
+                   save_llm_request: bool = False):
     # Create the OpenAI client with config specific api key and url. The api key
     # read by the config Class and is not stored in the config
     setup_logging()
@@ -28,7 +29,10 @@ def add_categories(book: BookModel, config: ConfigBaseModel, file_path: str, sav
                 if not content:
                     print("Book:", book.book_title, "Chapter:", chapter.chapter, " Chunk:", chunk.chunk_id, "No content!!")
                     continue
-                llm_request = LLMRequestModel(system=system_text, user=user_text, assistant=content)
+                if save_llm_request is True:
+                    llm_request = LLMRequestModel(system=system_text, user=user_text, assistant=content)
+                else:
+                    llm_request = None
                 chunk.category = CategoryModel.model_validate(json.loads(extract_json_from_text(content)))
                 chunk.category.llm_request = llm_request
 

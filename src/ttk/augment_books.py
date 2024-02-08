@@ -15,6 +15,7 @@ from ttk.llm_processing.add_categories import add_categories
 from ttk.llm_processing.add_chunk_questions import add_chunk_questions
 from ttk.llm_processing.add_chunk_summaries import add_chunk_summaries
 from ttk.external_config_loader import load_external_config_from_file_exec
+from ttk.llm_processing.remove_llm_request import remove_llm_requests_from_json
 from ttk.models.text_models import BookModel
 from ttk.utils import setup_logging
 
@@ -169,6 +170,10 @@ def main():
     parser_categories.add_argument("--config", help="The configuration that should be used "
                                                     "to create the keywords and topics data using an LLM.")
 
+    parser_llm_requ = subparsers.add_parser('remove_llm_request', help="Remove the LLM request text from the "
+                                                                       "json files.")
+    parser_llm_requ.add_argument("--input_dir", help="The directory with JSON books.")
+
     args = parser.parse_args()
 
     if args.command == 'add_chunk_summaries':
@@ -179,6 +184,9 @@ def main():
         print("Add chapter summaries")
         config = load_external_config_from_file_exec(args.config)
         walk_directory(args.input_dir, config, add_chapter_summaries, consolidate=False)
+    elif args.command == 'remove_llm_request':
+        print("Remove LLM requests")
+        walk_directory(args.input_dir, None, remove_llm_requests_from_json, consolidate=False)
     elif args.command == 'add_chunk_questions':
         config = load_external_config_from_file_exec(args.config)
         book_model_list = walk_directory(args.input_dir, config, add_chunk_questions, consolidate=False)

@@ -8,7 +8,8 @@ from ttk.models.config_models import QuestionChunkConfigModel
 from ttk.utils import request_llm, log_exception
 
 
-def add_chapter_questions(book: BookModel, config: QuestionChunkConfigModel, file_path: str, save_to_file: bool = True):
+def add_chapter_questions(book: BookModel, config: QuestionChunkConfigModel, file_path: str,
+                          save_to_file: bool = True, save_llm_request: bool = False):
     openai_client = OpenAI(api_key=config.api_key, base_url=config.url)
 
     for chapter in book.chapters:
@@ -33,7 +34,7 @@ def add_chapter_questions(book: BookModel, config: QuestionChunkConfigModel, fil
                 continue
             process_questions(book=book, chapter=chapter, chunk=None, config=config, content=content,
                               file_path=file_path, quest_meta_model=quest_meta_model, save_to_file=save_to_file,
-                              system_text=system_text, user_text=user_text)
+                              system_text=system_text, user_text=user_text, save_llm_request=save_llm_request)
             message = f"Book: {book.book_title}, Chapter: {chapter.chapter}, " \
                       f"Added {chapter.num_questions} questions :: identifier {config.name}"
             print(message)
