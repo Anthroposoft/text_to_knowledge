@@ -33,7 +33,7 @@ def process_summary(book: BookModel, config: Union[SummaryChunkConfigModel, Conf
 def process_questions(book: BookModel, chapter: ChapterModel, chunk: Optional[ChunkModel],
                       config: QuestionChunkConfigModel,
                       content: str, file_path: str, quest_meta_model: QuestionMetaModel, save_to_file: bool,
-                      system_text: str, user_text: str):
+                      system_text: str, user_text: str) -> int:
     list_model = ListOfTextResponseModel.model_validate(json.loads(extract_json_from_text(content)))
     question_list = []
     for question in list_model.text_list:
@@ -51,6 +51,7 @@ def process_questions(book: BookModel, chapter: ChapterModel, chunk: Optional[Ch
     save_book_to_file(book, file_path, save_to_file)
     if config.sleep_time_between_api_calls:
         time.sleep(config.sleep_time_between_api_calls)
+    return len(question_list)
 
 
 def process_answers(book: BookModel, config: QuestionAnsweringChunkConfigModel, content: str,

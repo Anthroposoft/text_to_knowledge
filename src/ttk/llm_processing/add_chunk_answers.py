@@ -46,8 +46,9 @@ def add_chunk_answers_to_questions(book: BookModel, config: QuestionAnsweringChu
                         process_answers(book, config, content, file_path, question, save_to_file, system_text,
                                         user_text)
                         message = f"Book: {book.book_title}, Chapter: {chapter.chapter}, " \
+                                  f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
                                   f"chunk {chunk.chunk_id + 1}/{len(chapter.chunks)} " \
-                                  f"Added answer number {idx+ 1}/{config.number_of_answers} for question " \
+                                  f"Added answer number {idx + 1}/{config.number_of_answers} for question " \
                                   f"{question_id + 1}/{len(meta_model.questions)} :: identifier {config.name}"
                         print(message)
                         logging.info(message)

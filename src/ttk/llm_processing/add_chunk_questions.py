@@ -1,14 +1,10 @@
 import logging
-import time
 from openai import OpenAI
-import json
 
 from ttk.llm_processing.common_tools import process_questions
-from ttk.models.text_models import BookModel, QuestionModel, LLMRequestModel, ListOfTextResponseModel, \
-    QuestionMetaModel
+from ttk.models.text_models import BookModel, QuestionMetaModel
 from ttk.models.config_models import QuestionChunkConfigModel
-from ttk.utils import extract_json_from_text, request_llm, save_book_to_file, log_exception, \
-    check_create_previous_chunks_questions
+from ttk.utils import request_llm, log_exception, check_create_previous_chunks_questions
 
 
 def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_path: str, save_to_file: bool = True):
@@ -28,7 +24,7 @@ def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_
             check_create_previous_chunks_questions(chunk_id, config, previous_chunk_ids, quest_meta_model)
             # Jump over already generated questions
             if len(quest_meta_model.questions) > 0:
-                print(file_path, "Questions ", config.name, " present for chapter ", chapter.chapter,
+                print("Book:", book.book_title, "Questions ", config.name, " present for chapter ", chapter.chapter,
                       " with chunk id ", chunk.chunk_id)
                 continue
             # The chunk ids mus be stored to assure correct assessment of the generated summaries later on
@@ -52,12 +48,15 @@ def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_
                     logging.error(f"No content created for file {file_path} chapter: {chapter.chapter}, "
                                   f"chunk: {chunk.chunk_id}")
                     continue
-                process_questions(book=book, chapter=chapter, chunk=chunk, config=config, content=content,
-                                  file_path=file_path, quest_meta_model=quest_meta_model, save_to_file=save_to_file,
-                                  system_text=system_text, user_text=user_text)
-                message = f"Book: {book.book_title}, Chapter: {chapter.chapter}, " \
+                num_questions = process_questions(book=book, chapter=chapter, chunk=chunk, config=config,
+                                                  content=content, file_path=file_path,
+                                                  quest_meta_model=quest_meta_model,
+                                                  save_to_file=save_to_file, system_text=system_text,
+                                                  user_text=user_text)
+                message = f"Book: {book.book_title}, Chapter: {chapter.chapter} " \
+                          f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
                           f"chunk {chunk.chunk_id + 1}/{len(chapter.chunks)} " \
-                          f"Added {chapter.num_questions} questions :: identifier {config.name}"
+                          f"Added {num_questions} questions :: identifier {config.name}"
                 print(message)
                 logging.info(message)
             except Exception as e:
