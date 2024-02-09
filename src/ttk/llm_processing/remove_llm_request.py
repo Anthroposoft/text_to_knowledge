@@ -23,11 +23,13 @@ def remove_llm_request_from_summaries(meta_dict: Dict[str, ResultMetaModel]):
 
 def remove_llm_requests_from_json(book: BookModel, config: SummaryChunkConfigModel, file_path: str,
                                   save_to_file: bool = True, save_llm_request: bool = False):
-
+    book.category.llm_request = None
     for chapter in book.chapters:
         chapter.llm_request = None
+        chapter.category.llm_request = None
         for chunk in chapter.chunks:
             chunk.llm_request = None
+            chunk.category.llm_request = None
             if chunk.questions:
                 remove_llm_request_from_question_model(meta_dict=chunk.questions)
                 remove_llm_request_from_summaries(meta_dict=chunk.summaries)
