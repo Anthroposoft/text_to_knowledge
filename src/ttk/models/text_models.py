@@ -32,6 +32,8 @@ class CategoryModel(BaseModel):
     """A list of dates in the text"""
     places: List[str] = []
     """A list of places in the text"""
+    events: List[str] = []
+    """A list of major events that took place in the text"""
     llm_request: Optional[LLMRequestModel] = None
     """The LLM request to answer tis question"""
 
@@ -57,6 +59,8 @@ class QuestionModel(BaseModel):
     """The question regarding a text from a chunk, summary or chapter"""
     question: str = ""
     """The question"""
+    permutation: Optional[List[str]] = None
+    """All permutations of this question"""
     answers: List[ResultModel] = []
     """The list of answers"""
     llm_request: Optional[LLMRequestModel] = None

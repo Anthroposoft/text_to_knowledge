@@ -19,6 +19,7 @@ python = "^3.9"
 pydantic = "2.5.3"
 openai = "1.8.0"
 python-dotenv = "1.0.0"
+chromadb = "0.4.22"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

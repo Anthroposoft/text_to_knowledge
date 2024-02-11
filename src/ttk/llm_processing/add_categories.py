@@ -8,6 +8,15 @@ from ttk.utils import extract_json_from_text, setup_logging, request_llm, log_ex
 
 def add_categories(book: BookModel, config: ConfigBaseModel, file_path: str, save_to_file: bool = True,
                    save_llm_request: bool = False):
+    """Add categories, topics, keywords, places, dates, persons and events to paragraphs
+
+    :param book:
+    :param config:
+    :param file_path:
+    :param save_to_file:
+    :param save_llm_request:
+    :return:
+    """
     # Create the OpenAI client with config specific api key and url. The api key
     # read by the config Class and is not stored in the config
     setup_logging()

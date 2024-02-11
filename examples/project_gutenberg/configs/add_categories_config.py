@@ -8,28 +8,30 @@ You are an expert at analyzing texts and an expert at categorizing texts,
 capture keywords and recognize the most important topics in a text.
 You always go step by step and think about whether each is important
 You have grasped the topic and recognized keywords and categories. 
-You find all peoples, places and dates mentioned in the text.
+You find all peoples, places, major events and dates mentioned in the text.
 Make sure you always follow the user's instructions. You always write your answers in JSON format,
 that the user specifies.
 """
 
 CATEGORIES_TEMPLATE_EN = u"""
 Perform the following text analysis:
-- Find all relevant categories that are addressed in the text
+- Find all relevant categories that are addressed in the text, add a short description of this category if available
 - Find all relevant keywords in the text
 - Find all persons, real or imaginary, that are mentioned in the text
 - Find all dates like date, datetime, months, years, days, seasons
 - Find all places, real or imaginary that are mentioned in the text
+- Find all major events that are mentioned in the text
 
 Put all this data in the following JSON format in your answer:
 
 ```json
 {{
-    "categories": ["This is the first category :: This is the description", "This is the seconds category :: Description of the category", ...],
+    "categories": ["This is the first category :: This is the optional description", "This is the seconds category :: Optional description of the category", ...],
     "keywords": ["keyword 1", "keyword 2", ...],
     "persons": ["First Person", "Second Person", "Third Person", ...],
     "dates": ["1904", "Januar 1904", "20.12.1904", ...],
-    "places": ["Dornach", "Berlin", "Leipzig", "Weimar", ...]
+    "places": ["Dornach", "Berlin", "Leipzig", "Weimar", ...],
+    "events" : ["Entstehung der Erde", "Erscheinen der Söhne des Feuers", "Zerstörung Atlantis 10000bc"]
 }}
 ```
 Here is the text for analysis:

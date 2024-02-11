@@ -10,6 +10,19 @@ from ttk.utils import request_llm, log_exception
 
 def add_chapter_questions(book: BookModel, config: QuestionChunkConfigModel, file_path: str,
                           save_to_file: bool = True, save_llm_request: bool = False):
+    """Add questions to chapter
+
+    TODO: Add an LLM call to generate 10 - 20 permutations of each question
+    TODO: Add an LLM call to define which category and event this question belongs to. Use the existing categories
+          for the paragraph to let the LLM choose from
+
+    :param book:
+    :param config:
+    :param file_path:
+    :param save_to_file:
+    :param save_llm_request:
+    :return:
+    """
     openai_client = OpenAI(api_key=config.api_key, base_url=config.url)
 
     for chapter in book.chapters:
