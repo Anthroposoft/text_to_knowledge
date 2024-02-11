@@ -6,7 +6,7 @@ from ttk.models.text_models import BookModel, ChapterModel, ChunkModel, Question
 
 
 def remove_llm_request_from_question_model(meta_dict: Dict[str, QuestionMetaModel]):
-    for meta in meta_dict.values():
+    for key, meta in meta_dict.items():
         meta.llm_request = None
         for question in meta.questions:
             question.llm_request = None
@@ -23,6 +23,7 @@ def remove_llm_request_from_summaries(meta_dict: Dict[str, ResultMetaModel]):
 
 def remove_llm_requests_from_json(book: BookModel, config: SummaryChunkConfigModel, file_path: str,
                                   save_to_file: bool = True, save_llm_request: bool = False):
+    print("Remove llm responses from book", book.book_title)
     book.category.llm_request = None
     for chapter in book.chapters:
         chapter.llm_request = None

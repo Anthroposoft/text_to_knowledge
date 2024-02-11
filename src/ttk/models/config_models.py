@@ -78,7 +78,7 @@ class QuestionChunkConfigModel(ContextChunkBaseModel):
 Create a list of all possible meaningful formulations of the following question:
 {question}
 
-Write one question per line. Do not enumerate the questions. 
+Write one question per line. Do not enumerate the questions or indicate a form of list with leading - or *. 
 Always use the original language of the question for the new formulations.
     """
     """The system prompt that should be used to create the permutation of the already created question"""

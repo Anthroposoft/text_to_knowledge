@@ -153,3 +153,4 @@ cython_debug/
 .idea/
 poetry.lock
 .DS_Store
+/examples/project_gutenberg/rag/db/

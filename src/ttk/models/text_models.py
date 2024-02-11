@@ -59,7 +59,7 @@ class QuestionModel(BaseModel):
     """The question regarding a text from a chunk, summary or chapter"""
     question: str = ""
     """The question"""
-    permutation: Optional[List[str]] = None
+    permutations: Optional[List[str]] = []
     """All permutations of this question"""
     answers: List[ResultModel] = []
     """The list of answers"""

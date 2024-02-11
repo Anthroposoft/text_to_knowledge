@@ -61,6 +61,15 @@ def process_questions(book: BookModel, chapter: ChapterModel, chunk: Optional[Ch
     return len(question_list)
 
 
+def process_permutation_questions(book: BookModel, question_model: QuestionModel, config: QuestionChunkConfigModel,
+                                  content: str, file_path: str, save_to_file: bool) -> int:
+    question_model.permutations = content.split("\n")
+    save_book_to_file(book, file_path, save_to_file)
+    if config.sleep_time_between_api_calls:
+        time.sleep(config.sleep_time_between_api_calls)
+    return len(question_model.permutations)
+
+
 def process_answers(book: BookModel, config: QuestionAnsweringChunkConfigModel, content: str,
                     file_path: str, question: QuestionModel, save_to_file: bool, system_text: str,
                     user_text: str, save_llm_request: bool = False):
