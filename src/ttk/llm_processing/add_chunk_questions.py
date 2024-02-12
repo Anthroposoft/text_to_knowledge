@@ -98,7 +98,8 @@ def generate_permutation_questions(book, chapter, config, file_path, openai_clie
                       " question", question_model.question)
                 continue
             user_text = config.question_permutation_prompt.format(question=question_model.question)
-            messages = [{"role": "system", "content": ""}, {"role": "user", "content": user_text}]
+            messages = [{"role": "system", "content": "Follow the instructions of the user."},
+                        {"role": "user", "content": user_text}]
             content = None
             try:
                 content = request_llm(openai_client=openai_client, config=config, messages=messages)
