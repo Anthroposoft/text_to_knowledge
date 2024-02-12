@@ -40,6 +40,7 @@ def extract_qa_pairs_with_metadata(book_model: BookModel, chapter: ChapterModel,
             print(f"Write question:", question.question)
             if len(question.answers) > 0:
                 m = QuestionAnswerTrainingData(question=question.question,
+                                               permutations=question.permutations,
                                                original_text=original_text,
                                                answer=question.answers[0].text,
                                                categories=category.categories,

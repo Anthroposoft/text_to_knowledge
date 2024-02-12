@@ -210,6 +210,7 @@ class QuestionAnswerTrainingData(BaseModel):
     """Model to store the response from the LLM when it creates question/answer pairs"""
     original_text: str = ""
     question: str = ""
+    permutations: Optional[List[str]] = []
     answer: str = ""
     categories: List[str] = []
     book_title: str = ""
