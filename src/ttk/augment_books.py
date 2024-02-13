@@ -218,6 +218,7 @@ def main():
                 print(f"Book :: {book_model.book_title} :: Total number of persons", len(book_model.category.persons))
                 print(f"Book :: {book_model.book_title} :: Total number of places", len(book_model.category.places))
                 print(f"Book :: {book_model.book_title} :: Total number of dates", len(book_model.category.dates))
+                print(f"Book :: {book_model.book_title} :: Total number of events", len(book_model.category.events))
                 print(f"Book :: {book_model.book_title} :: Generated number of questions: ",
                       book_model.count_questions())
 

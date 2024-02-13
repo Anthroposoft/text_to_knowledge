@@ -147,6 +147,7 @@ class ChapterModel(TextBaseModel):
                 category.persons.extend(chunk.category.persons)
                 category.places.extend(chunk.category.places)
                 category.dates.extend(chunk.category.dates)
+                category.events.extend(chunk.category.events)
         if has_data:
             self.category = category
             self.category.categories = list(set(self.category.categories))
@@ -154,6 +155,7 @@ class ChapterModel(TextBaseModel):
             self.category.persons = list(set(self.category.persons))
             self.category.places = list(set(self.category.places))
             self.category.dates = list(set(self.category.dates))
+            self.category.events = list(set(self.category.events))
 
 
 class BookModel(TextBaseModel):
@@ -185,6 +187,7 @@ class BookModel(TextBaseModel):
                 category.persons.extend(chapter.category.persons)
                 category.places.extend(chapter.category.places)
                 category.dates.extend(chapter.category.dates)
+                category.events.extend(chapter.category.events)
         if has_data:
             self.category = category
             self.category.categories = list(set(self.category.categories))
@@ -192,6 +195,7 @@ class BookModel(TextBaseModel):
             self.category.persons = list(set(self.category.persons))
             self.category.places = list(set(self.category.places))
             self.category.dates = list(set(self.category.dates))
+            self.category.events = list(set(self.category.events))
 
 
 class TextResponseModel(BaseModel):
