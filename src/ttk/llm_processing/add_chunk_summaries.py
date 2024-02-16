@@ -52,7 +52,12 @@ def add_chunk_summaries(book: BookModel, config: SummaryChunkConfigModel, file_p
                     process_summary(book=book, config=config, content=content, file_path=file_path,
                                     save_to_file=save_to_file, sum_meta_model=sum_meta_model, system_text=system_text,
                                     user_text=user_text, save_llm_request=save_llm_request)
-                    print(file_path, "Chapter:", chapter.chapter, " Chunk:", chunk.chunk_id, "summary ", idx, "added!")
+                    message = f"Book: {book.book_title}, Chapter: {chapter.chapter} " \
+                              f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
+                              f"chunk {chunk.chunk_id + 1}/{len(chapter.chunks)} " \
+                              f"Added {idx + 1}/{summaries_to_create} summaries :: identifier {config.name}"
+                    print(message)
+                    logging.info(message)
                 except Exception as e:
                     log_exception(book=book, chapter=chapter, chunk=chunk, content=content, e=e, file_path=file_path,
                                   meta_model=sum_meta_model, save_to_file=save_to_file, system_text=system_text,

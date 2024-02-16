@@ -82,8 +82,8 @@ load_dotenv()
 config = QuestionChunkConfigModel()
 config.system_prompt = SYSTEM_PROMPT
 config.user_prompt = QUESTION_TEMPLATE
-config.num_context_chunks = 10
-config.number_of_questions_div = 20
+config.num_context_chunks = 5
+config.number_of_questions_div = 40
 config.sleep_time_between_api_calls = 1
 config.name = "complex_questions"
 config.context = "Create a list of complex questions for the provided paragraphs"

@@ -49,6 +49,12 @@ def add_chapter_summaries(book: BookModel, config: SummaryChunkConfigModel, file
                                 save_to_file=save_to_file, sum_meta_model=sum_meta_model, system_text=system_text,
                                 user_text=user_text, save_llm_request=save_llm_request)
                 print(file_path, "Chapter:", chapter.chapter, "summary ", idx, "added")
+
+                message = f"Book: {book.book_title}, Chapter: {chapter.chapter} " \
+                          f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
+                          f"Added {idx + 1}/{summaries_to_create} summaries :: identifier {config.name}"
+                print(message)
+                logging.info(message)
             except Exception as e:
                 log_exception(book=book, chapter=chapter, chunk=None, content=content, e=e, file_path=file_path,
                               meta_model=sum_meta_model, save_to_file=save_to_file, system_text=system_text,

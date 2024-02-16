@@ -24,7 +24,7 @@ def consolidate_sums_and_cats(book: BookModel):
     book.build_category_from_chapters()
 
 
-def process_book(file_path, config, action_function, consolidate=False) -> BookModel:
+def process_book(file_path, config, action_function, consolidate=False, save_llm_request=False) -> BookModel:
     """
     Process a single book file, applying the specified action function to it.
 
@@ -38,7 +38,8 @@ def process_book(file_path, config, action_function, consolidate=False) -> BookM
         with open(file_path, "r", encoding="utf-8") as f:
             book_json = f.read()
         book_model = BookModel.model_validate_json(book_json)
-        action_function(book=book_model, config=config, file_path=file_path, save_to_file=True)
+        action_function(book=book_model, config=config, file_path=file_path, save_to_file=True,
+                        save_llm_request=save_llm_request)
         if consolidate is True:
             consolidate_sums_and_cats(book_model)
         with open(file_path, "w", encoding="utf-8") as f:
@@ -78,7 +79,7 @@ def rotate_backup_files(file_path, backup_dir, max_backups=10):
     shutil.copy2(file_path, first_backup)
 
 
-def walk_directory(directory, config, action_function, consolidate=False) -> List[BookModel]:
+def walk_directory(directory, config, action_function, consolidate=False, save_llm_request=False) -> List[BookModel]:
     """
     Walk through the directory, processing each book file found.
 
@@ -105,7 +106,7 @@ def walk_directory(directory, config, action_function, consolidate=False) -> Lis
                 rotate_backup_files(file_path, backup_dir)
 
                 # Process the book file
-                book_model = process_book(file_path, config, action_function, consolidate)
+                book_model = process_book(file_path, config, action_function, consolidate, save_llm_request)
                 if book_model:
                     book_model_list.append(book_model)
 
@@ -127,6 +128,9 @@ def main():
                                                                        "for each chunk of the book.")
     parser_summary.add_argument("--input_dir", help="The directory with JSON books.")
     parser_summary.add_argument("--config", help="The configuration that should be used to create the summaries.")
+    parser_summary.add_argument("--save_llm", type=bool, default=False,
+                                help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                     "JSON files, so be careful using it.")
 
     parser_chapter_summary = subparsers.add_parser('add_chapter_summaries',
                                                    help="Augment the provided JSON book files in a "
@@ -135,12 +139,18 @@ def main():
     parser_chapter_summary.add_argument("--input_dir", help="The directory with JSON books.")
     parser_chapter_summary.add_argument("--config",
                                         help="The configuration that should be used to create the summaries.")
+    parser_chapter_summary.add_argument("--save_llm", type=bool, default=False,
+                                        help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                             "JSON files, so be careful using it.")
 
     parser_questions = subparsers.add_parser('add_chunk_questions', help="Augment the provided JSON book files in a "
                                                                          "directory with questions using an LLM "
                                                                          "for each chunk of the book.")
     parser_questions.add_argument("--input_dir", help="The directory with JSON books.")
     parser_questions.add_argument("--config", help="The configuration that should be used to create the questions.")
+    parser_questions.add_argument("--save_llm", type=bool, default=False,
+                                  help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                       "JSON files, so be careful using it.")
 
     parser_chapter_questions = subparsers.add_parser('add_chapter_questions',
                                                      help="Augment the provided JSON book files in a "
@@ -149,12 +159,18 @@ def main():
     parser_chapter_questions.add_argument("--input_dir", help="The directory with JSON books.")
     parser_chapter_questions.add_argument("--config",
                                           help="The configuration that should be used to create the questions.")
+    parser_chapter_questions.add_argument("--save_llm", type=bool, default=False,
+                                          help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                               "JSON files, so be careful using it.")
 
     parser_answers = subparsers.add_parser('add_chunk_answers', help="Augment the provided JSON book files in a "
                                                                      "directory with answers to the previous generated "
                                                                      "questions for chunks using an LLM.")
     parser_answers.add_argument("--input_dir", help="The directory with JSON books.")
     parser_answers.add_argument("--config", help="The configuration that should be used to create the answers.")
+    parser_answers.add_argument("--save_llm", type=bool, default=False,
+                                help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                     "JSON files, so be careful using it.")
 
     parser_chapter_answers = subparsers.add_parser('add_chapter_answers',
                                                    help="Augment the provided JSON book files in a "
@@ -162,6 +178,9 @@ def main():
                                                         "questions for chapters using an LLM.")
     parser_chapter_answers.add_argument("--input_dir", help="The directory with JSON books.")
     parser_chapter_answers.add_argument("--config", help="The configuration that should be used to create the answers.")
+    parser_chapter_answers.add_argument("--save_llm", type=bool, default=False,
+                                        help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                             "JSON files, so be careful using it.")
 
     parser_categories = subparsers.add_parser('add_categories', help="Augment the provided JSON book files "
                                                                      "in a directory with keywords and topics "
@@ -169,6 +188,9 @@ def main():
     parser_categories.add_argument("--input_dir", help="The directory with JSON books.")
     parser_categories.add_argument("--config", help="The configuration that should be used "
                                                     "to create the keywords and topics data using an LLM.")
+    parser_categories.add_argument("--save_llm", type=bool, default=False,
+                                   help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                        "JSON files, so be careful using it.")
 
     parser_llm_requ = subparsers.add_parser('remove_llm_request', help="Remove the LLM request text from the "
                                                                        "json files.")
@@ -179,37 +201,43 @@ def main():
     if args.command == 'add_chunk_summaries':
         print("Add summaries")
         config = load_external_config_from_file_exec(args.config)
-        walk_directory(args.input_dir, config, add_chunk_summaries, consolidate=False)
+        walk_directory(args.input_dir, config, add_chunk_summaries, consolidate=False, save_llm_request=args.save_llm)
     elif args.command == 'add_chapter_summaries':
         print("Add chapter summaries")
         config = load_external_config_from_file_exec(args.config)
-        walk_directory(args.input_dir, config, add_chapter_summaries, consolidate=False)
+        walk_directory(args.input_dir, config, add_chapter_summaries, consolidate=False, save_llm_request=args.save_llm)
     elif args.command == 'remove_llm_request':
         print("Remove LLM requests")
-        walk_directory(args.input_dir, None, remove_llm_requests_from_json, consolidate=False)
+        walk_directory(args.input_dir, None, remove_llm_requests_from_json, consolidate=False,
+                       save_llm_request=args.save_llm)
     elif args.command == 'add_chunk_questions':
         config = load_external_config_from_file_exec(args.config)
-        book_model_list = walk_directory(args.input_dir, config, add_chunk_questions, consolidate=False)
+        book_model_list = walk_directory(args.input_dir, config, add_chunk_questions, consolidate=False,
+                                         save_llm_request=args.save_llm)
         for book_model in book_model_list:
             print(f"Book :: {book_model.book_title} :: Generated number of questions: ", book_model.count_questions())
     elif args.command == 'add_chapter_questions':
         config = load_external_config_from_file_exec(args.config)
-        book_model_list = walk_directory(args.input_dir, config, add_chapter_questions, consolidate=False)
+        book_model_list = walk_directory(args.input_dir, config, add_chapter_questions, consolidate=False,
+                                         save_llm_request=args.save_llm)
         for book_model in book_model_list:
             print(f"Book :: {book_model.book_title} :: Generated number of questions: ", book_model.count_questions())
     elif args.command == 'add_chunk_answers':
         config = load_external_config_from_file_exec(args.config)
-        book_model_list = walk_directory(args.input_dir, config, add_chunk_answers_to_questions, consolidate=False)
+        book_model_list = walk_directory(args.input_dir, config, add_chunk_answers_to_questions, consolidate=False,
+                                         save_llm_request=args.save_llm)
         for book_model in book_model_list:
             print(f"Book :: {book_model.book_title} :: Generated number of answers: ", book_model.count_questions())
     elif args.command == 'add_chapter_answers':
         config = load_external_config_from_file_exec(args.config)
-        book_model_list = walk_directory(args.input_dir, config, add_chapter_answers_to_questions, consolidate=False)
+        book_model_list = walk_directory(args.input_dir, config, add_chapter_answers_to_questions, consolidate=False,
+                                         save_llm_request=args.save_llm)
         for book_model in book_model_list:
             print(f"Book :: {book_model.book_title} :: Generated number of answers: ", book_model.count_questions())
     elif args.command == 'add_categories':
         config = load_external_config_from_file_exec(args.config)
-        book_model_list = walk_directory(args.input_dir, config, add_categories, consolidate=True)
+        book_model_list = walk_directory(args.input_dir, config, add_categories, consolidate=True,
+                                         save_llm_request=args.save_llm)
         for book_model in book_model_list:
             if book_model and book_model.category:
                 print(f"Book :: {book_model.book_title} :: Total number of categories",

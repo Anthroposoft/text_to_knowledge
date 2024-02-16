@@ -92,6 +92,7 @@ This is the list of categories you need to chose a single one from:
 {categories}
     """
 
+
 class QuestionAnsweringChunkConfigModel(ContextChunkBaseModel):
     """Chunk specific prompt for questions answering
 
@@ -104,5 +105,5 @@ class QuestionAnsweringChunkConfigModel(ContextChunkBaseModel):
     {chunk_text}  - Formulate the prompt, so that the chunk_text is mentioned
     {question}  - Formulate the prompt, so that the chunk_text is mentioned
     """
-    number_of_answers: int = 3
+    number_of_answers: int = 1
     """The number of answers that should be generated for a single question"""

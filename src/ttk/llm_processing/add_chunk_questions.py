@@ -2,7 +2,7 @@ import logging
 from openai import OpenAI
 
 from ttk.llm_processing.common_tools import process_questions, process_permutation_questions
-from ttk.models.text_models import BookModel, QuestionMetaModel
+from ttk.models.text_models import BookModel, QuestionMetaModel, LLMRequestModel
 from ttk.models.config_models import QuestionChunkConfigModel
 from ttk.utils import request_llm, log_exception, check_create_previous_chunks_questions
 
@@ -27,7 +27,7 @@ def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_
     openai_client = OpenAI(api_key=config.api_key, base_url=config.url)
     for chapter in book.chapters:
         generate_questions(book, chapter, config, file_path, openai_client, save_llm_request, save_to_file)
-        generate_permutation_questions(book, chapter, config, file_path, openai_client, save_to_file)
+        generate_permutation_questions(book, chapter, config, file_path, openai_client, save_to_file, save_llm_request)
 
 
 def generate_questions(book, chapter, config, file_path, openai_client, save_llm_request, save_to_file):
@@ -85,7 +85,7 @@ def generate_questions(book, chapter, config, file_path, openai_client, save_llm
             continue
 
 
-def generate_permutation_questions(book, chapter, config, file_path, openai_client, save_to_file):
+def generate_permutation_questions(book, chapter, config, file_path, openai_client, save_to_file, save_llm_request):
     for chunk_id, chunk in enumerate(chapter.chunks):
         quest_meta_model: QuestionMetaModel = chunk.questions[config.name]
         # Jump over already generated questions
@@ -113,6 +113,13 @@ def generate_permutation_questions(book, chapter, config, file_path, openai_clie
                                                               content=content,
                                                               file_path=file_path,
                                                               save_to_file=save_to_file)
+
+                if save_llm_request is True:
+                    llm_request = LLMRequestModel(system="Follow the instructions of the user.",
+                                                  user=user_text, assistant=content)
+                else:
+                    llm_request = None
+                question_model.llm_request = llm_request
                 message = f"Book: {book.book_title}, Chapter: {chapter.chapter} " \
                           f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
                           f"Chunk {chunk.chunk_id + 1}/{len(chapter.chunks)} " \
