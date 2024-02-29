@@ -5,7 +5,7 @@ This is a very early development version and should only be used very carefully.
 
 ## Approach
 
-- Generate augmented JSON from Books
+- Generate augmented JSON from text books
 - Augment the JSON with 
   - summaries
   - questions/answer pairs

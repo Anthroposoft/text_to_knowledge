@@ -13,6 +13,7 @@ from ttk.llm_processing.add_chapter_summaries import add_chapter_summaries
 from ttk.llm_processing.add_chunk_answers import add_chunk_answers_to_questions
 from ttk.llm_processing.add_categories import add_categories
 from ttk.llm_processing.add_chunk_questions import add_chunk_questions
+from ttk.llm_processing.add_chunk_question_permutations import add_chunk_question_permutations
 from ttk.llm_processing.add_chunk_summaries import add_chunk_summaries
 from ttk.external_config_loader import load_external_config_from_file_exec
 from ttk.llm_processing.remove_llm_request import remove_llm_requests_from_json
@@ -152,6 +153,15 @@ def main():
                                   help="Save the LLM request and response in the JONS file. This can lead to huge "
                                        "JSON files, so be careful using it.")
 
+    parser_question_perms = subparsers.add_parser('add_chunk_question_permutations',
+                                                  help="Add new question formulations to the existing questions for a chunk")
+    parser_question_perms.add_argument("--input_dir", help="The directory with JSON books.")
+    parser_question_perms.add_argument("--config", help="The configuration that should be used to create the questions "
+                                                        "permutations.")
+    parser_question_perms.add_argument("--save_llm", type=bool, default=False,
+                                       help="Save the LLM request and response in the JONS file. This can lead to huge "
+                                            "JSON files, so be careful using it.")
+
     parser_chapter_questions = subparsers.add_parser('add_chapter_questions',
                                                      help="Augment the provided JSON book files in a "
                                                           "directory with questions using an LLM "
@@ -213,6 +223,12 @@ def main():
     elif args.command == 'add_chunk_questions':
         config = load_external_config_from_file_exec(args.config)
         book_model_list = walk_directory(args.input_dir, config, add_chunk_questions, consolidate=False,
+                                         save_llm_request=args.save_llm)
+        for book_model in book_model_list:
+            print(f"Book :: {book_model.book_title} :: Generated number of questions: ", book_model.count_questions())
+    elif args.command == 'add_chunk_question_permutations':
+        config = load_external_config_from_file_exec(args.config)
+        book_model_list = walk_directory(args.input_dir, config, add_chunk_question_permutations, consolidate=False,
                                          save_llm_request=args.save_llm)
         for book_model in book_model_list:
             print(f"Book :: {book_model.book_title} :: Generated number of questions: ", book_model.count_questions())

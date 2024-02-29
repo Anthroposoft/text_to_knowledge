@@ -74,23 +74,10 @@ class QuestionChunkConfigModel(ContextChunkBaseModel):
     number_of_questions_div: int = 30
     """This parameters is used to compute the number of questions based on the number of words in the chunk.
     The number of question = num_words_chunk / number_of_questions_div """
-    question_permutation_prompt: str = """
-Create a list of all possible meaningful formulations of the following question:
-{question}
-
-Write one question per line. Do not enumerate the questions or indicate a form of list with leading - or *. 
-Always use the original language of the question for the new formulations.
-    """
-    """The system prompt that should be used to create the permutation of the already created question"""
-    category_selection_prompt: str = """
-Select one categories from a list of categories that fits best the following question:
-
-{question}
-
-This is the list of categories you need to chose a single one from:
-
-{categories}
-    """
+    chapter_summarie_id: str = ""
+    """The id of the chapter summary that should be used to add context to the question generation"""
+    book_summarie_id: str = ""
+    """The id of the book summary that should be used to add context to the question generation"""
 
 
 class QuestionAnsweringChunkConfigModel(ContextChunkBaseModel):
