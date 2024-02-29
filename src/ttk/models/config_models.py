@@ -39,7 +39,7 @@ class ContextChunkBaseModel(ConfigBaseModel):
 class SummaryChunkConfigModel(ContextChunkBaseModel):
     """Chunk specific prompt for summaries generation
 
-    The user prompt must contain the following string substitutions:
+    The user prompt can contain the following string substitutions:
 
     {book_title}  - Formulate the prompt, so that the book title is mentioned
     {chapter}  - Formulate the prompt, so that the chapter is mentioned
@@ -58,8 +58,10 @@ class SummaryChunkConfigModel(ContextChunkBaseModel):
 class QuestionChunkConfigModel(ContextChunkBaseModel):
     """Chunk specific prompt for questions generation
 
-    The user prompt must contain the following string substitutions:
+    The user prompt can contain the following string substitutions:
 
+    {book_summary} - This will include the book summary, if present to improve the context for question generation
+    {chapter_summary} - This will include the chapter summary, if the number of chunks is greater 1, for better context
     {book_title}  - Formulate the prompt, so that the book title is mentioned
     {chapter}  - Formulate the prompt, so that the chapter is mentioned
     {authors}  - Formulate the prompt, so that the author is mentioned
