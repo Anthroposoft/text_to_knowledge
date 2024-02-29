@@ -25,7 +25,7 @@ QuestionChunkConfigModel, ConfigBaseModel]:
 def load_external_config_from_file_exec(file_path: str) -> Union[CategoryChunkConfigModel, SummaryChunkConfigModel,
 QuestionChunkConfigModel, ConfigBaseModel]:
     """Load the Python code from the config file and return the configuration"""
-    with open(file_path, "r") as config_file:
+    with open(file_path, "r", encoding="utf-8") as config_file:
         config_code = config_file.read()
     execution_environment = {}
     exec(config_code, execution_environment)
