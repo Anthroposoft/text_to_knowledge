@@ -30,6 +30,14 @@ def add_chunk_summaries(book: BookModel, config: SummaryChunkConfigModel, file_p
                 print(file_path, "Summary present for chapter ", chapter.chapter, " with chunk id ", chunk.chunk_id)
                 continue
 
+            # Extract possible events from the category
+            cat_events = ""
+            if chunk.category and chunk.category.events:
+                cat_events = "\n".join(chunk.category.events)
+            cat_persons = ""
+            if chunk.category and chunk.category.persons:
+                cat_persons = "\n".join(chunk.category.events)
+
             # The chunk ids mus be stored to assure correct assessment of the generated summaries later on
             sum_meta_model.previous_chunk_ids = [i for i in previous_chunk_ids]
             # Create the context chunks for the LLM from the previous chunk ods
@@ -38,7 +46,7 @@ def add_chunk_summaries(book: BookModel, config: SummaryChunkConfigModel, file_p
             system_text = config.system_prompt
             user_text = config.user_prompt.format(book_title=book.book_title, chapter=chapter.chapter,
                                                   authors=",".join(book.authors), context_chunks=context_chunks,
-                                                  chunk_text=chunk.text)
+                                                  chunk_text=chunk.text, events=cat_events, persons=cat_persons)
             messages = [{"role": "system", "content": system_text}, {"role": "user", "content": user_text}]
             # Create several summaries if requested
             for idx in range(summaries_to_create):
@@ -58,6 +66,7 @@ def add_chunk_summaries(book: BookModel, config: SummaryChunkConfigModel, file_p
                               f"Added {idx + 1}/{summaries_to_create} summaries :: identifier {config.name}"
                     print(message)
                     logging.info(message)
+                    logging.info(content)
                 except Exception as e:
                     log_exception(book=book, chapter=chapter, chunk=chunk, content=content, e=e, file_path=file_path,
                                   meta_model=sum_meta_model, save_to_file=save_to_file, system_text=system_text,

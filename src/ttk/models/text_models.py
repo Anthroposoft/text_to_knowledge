@@ -18,7 +18,7 @@ class LLMRequestModel(BaseModel):
     """The user question and context"""
     assistant: str = ""
     """The answer of the LLM"""
-    status: LLMRequestStatus = LLMRequestStatus.success
+    status: int = LLMRequestStatus.success.value
 
 
 class CategoryModel(BaseModel):

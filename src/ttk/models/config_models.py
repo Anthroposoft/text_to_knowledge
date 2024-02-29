@@ -46,6 +46,10 @@ class SummaryChunkConfigModel(ContextChunkBaseModel):
     {authors}  - Formulate the prompt, so that the author is mentioned
     {context_chunks}  - Formulate the prompt, so that the context_chunks is mentioned
     {chunk_text}  - Formulate the prompt, so that the chunk_text is mentioned
+
+    if events and person were found in categories, then these can be used in the summary using these identifiers:
+    {events}
+    {persons}
     """
     num_context_chunks: int = 10
     """The number of previous chunks that should be used as additional context to the current chunk for 
