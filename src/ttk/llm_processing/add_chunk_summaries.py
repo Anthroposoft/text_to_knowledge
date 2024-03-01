@@ -31,12 +31,9 @@ def add_chunk_summaries(book: BookModel, config: SummaryChunkConfigModel, file_p
                 continue
 
             # Extract possible events from the category
-            cat_events = ""
+            category_events = ""
             if chunk.category and chunk.category.events:
-                cat_events = "\n".join(chunk.category.events)
-            cat_persons = ""
-            if chunk.category and chunk.category.persons:
-                cat_persons = "\n".join(chunk.category.events)
+                category_events = "\n".join(chunk.category.events)
 
             # The chunk ids mus be stored to assure correct assessment of the generated summaries later on
             sum_meta_model.previous_chunk_ids = [i for i in previous_chunk_ids]
@@ -46,7 +43,7 @@ def add_chunk_summaries(book: BookModel, config: SummaryChunkConfigModel, file_p
             system_text = config.system_prompt
             user_text = config.user_prompt.format(book_title=book.book_title, chapter=chapter.chapter,
                                                   authors=",".join(book.authors), context_chunks=context_chunks,
-                                                  chunk_text=chunk.text, events=cat_events, persons=cat_persons)
+                                                  chunk_text=chunk.text, events=category_events)
             messages = [{"role": "system", "content": system_text}, {"role": "user", "content": user_text}]
             # Create several summaries if requested
             for idx in range(summaries_to_create):

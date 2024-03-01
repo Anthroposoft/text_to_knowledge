@@ -18,3 +18,9 @@ augment_books add_chunk_summaries --save_llm=True --input_dir=json_save_llm_requ
 
 # 7. Extract the summaries LLM requests and responses as a trainings dataset
 extract_knowledge --typ SUM_LLM --json_file=json_save_llm_request/GA_345.json --output_file=training_data/GA_345_summarie_reflected_llm.json --indent=4  --key=summaries_reflected
+
+# 8. Create chapter summaries
+augment_books add_chapter_summaries --save_llm=True --input_dir=json_save_llm_request/ --config=configs/add_chapter_summaries.py
+
+# 9. Create chapter summaries with reflection
+augment_books add_chapter_summaries --save_llm=True --input_dir=json_save_llm_request/ --config=configs/add_chapter_summaries_reflect.py

@@ -11,10 +11,6 @@ def add_chunk_questions(book: BookModel, config: QuestionChunkConfigModel, file_
                         save_to_file: bool = True, save_llm_request: bool = False):
     """Add questions to chunks
 
-    TODO: Add an LLM call to generate 10 - 20 permutations of each question
-    TODO: Add an LLM call to define which category and event this question belongs to. Use the existing categories
-          for the paragraph to let the LLM choose from
-
     :param book:
     :param config:
     :param file_path:

@@ -34,7 +34,7 @@ verbesserte Version der Zusammenfassung, die folgende Kriterien erfüllt:
 - Vermeide zu lange Sätze und halte die Informationen prägnant und auf den Punkt gebracht.
 - Verwende das unten vorgestellte YAML Format. 
 - Schreibe die Zusammenfassung in das "response" Feld.
-- Schreibe deine Überlegungen und Relfektionen zur finalen Zusammenfassung in dass "assessment" Feld.
+- Schreibe deine Überlegungen und Reflexionen zur finalen Zusammenfassung in dass "assessment" Feld.
 
 ```yaml
 response: |

@@ -32,10 +32,17 @@ def add_chapter_summaries(book: BookModel, config: SummaryChunkConfigModel, file
         if summaries_to_create <= 0:
             print(file_path, "Summary present for chapter ", chapter.chapter)
             continue
+
+        # Extract possible events from the category
+        category_events = ""
+        if chapter.category and chapter.category.events:
+            category_events = "\n".join([f"- {event}" for event in chapter.category.events])
+
         # Create the prompt based on the user configuration
         system_text = config.system_prompt
         user_text = config.user_prompt.format(book_title=book.book_title, chapter=chapter.chapter,
-                                              authors=",".join(book.authors), chapter_text=chapter.text)
+                                              authors=",".join(book.authors), chapter_text=chapter.text,
+                                              events=category_events)
         messages = [{"role": "system", "content": system_text}, {"role": "user", "content": user_text}]
         # Create several summaries if requested
         for idx in range(summaries_to_create):
@@ -48,13 +55,14 @@ def add_chapter_summaries(book: BookModel, config: SummaryChunkConfigModel, file
                 process_summary(book=book, config=config, content=content, file_path=file_path,
                                 save_to_file=save_to_file, sum_meta_model=sum_meta_model, system_text=system_text,
                                 user_text=user_text, save_llm_request=save_llm_request)
-                print(file_path, "Chapter:", chapter.chapter, "summary ", idx, "added")
-
                 message = f"Book: {book.book_title}, Chapter: {chapter.chapter} " \
                           f"{chapter.chapter_id + 1}/{len(book.chapters)}, " \
                           f"Added {idx + 1}/{summaries_to_create} summaries :: identifier {config.name}"
                 print(message)
                 logging.info(message)
+                logging.info(system_text)
+                logging.info(user_text)
+                logging.info(content)
             except Exception as e:
                 log_exception(book=book, chapter=chapter, chunk=None, content=content, e=e, file_path=file_path,
                               meta_model=sum_meta_model, save_to_file=save_to_file, system_text=system_text,
