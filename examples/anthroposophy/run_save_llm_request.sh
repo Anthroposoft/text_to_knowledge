@@ -9,3 +9,12 @@ extract_knowledge --typ CAT_LLM --json_file=json_save_llm_request/GA_345.json --
 
 # 4. Create chunk summaries
 augment_books add_chunk_summaries --save_llm=True --input_dir=json_save_llm_request/ --config=configs/add_chunk_summaries.py
+
+# 5. Extract the summaries LLM requests and responses as a trainings dataset
+extract_knowledge --typ SUM_LLM --json_file=json_save_llm_request/GA_345.json --output_file=training_data/GA_345_summarie_llm.json --indent=4  --key=summaries
+
+# 6. Create chunk summaries with reflection
+augment_books add_chunk_summaries --save_llm=True --input_dir=json_save_llm_request/ --config=configs/add_chunk_summaries_reflect.py
+
+# 7. Extract the summaries LLM requests and responses as a trainings dataset
+extract_knowledge --typ SUM_LLM --json_file=json_save_llm_request/GA_345.json --output_file=training_data/GA_345_summarie_reflected_llm.json --indent=4  --key=summaries_reflected

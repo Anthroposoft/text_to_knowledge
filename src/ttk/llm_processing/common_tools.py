@@ -1,12 +1,13 @@
 import json
 import time
 from typing import Union, Optional
+import yaml
 
 from ttk.models.config_models import SummaryChunkConfigModel, ConfigBaseModel, QuestionChunkConfigModel, \
     QuestionAnsweringChunkConfigModel
 from ttk.models.text_models import BookModel, ChapterModel, ResultMetaModel, TextResponseModel, LLMRequestModel, \
     ResultModel, ChunkModel, QuestionMetaModel, ListOfTextResponseModel, QuestionModel
-from ttk.utils import extract_json_from_text, save_book_to_file
+from ttk.utils import extract_json_from_text, save_book_to_file, extract_yaml_from_text
 
 
 def process_summary(book: BookModel, config: Union[SummaryChunkConfigModel, ConfigBaseModel], content: str,
@@ -17,6 +18,8 @@ def process_summary(book: BookModel, config: Union[SummaryChunkConfigModel, Conf
     # Most of the time the error raises here
     if '```json' in content:
         response_model = TextResponseModel.model_validate(json.loads(extract_json_from_text(content)))
+    elif '```yaml' in content:
+        response_model = TextResponseModel.model_validate(yaml.safe_load(extract_yaml_from_text(content)))
     else:
         response_model = TextResponseModel(response=content)
     # Create the summary entries
