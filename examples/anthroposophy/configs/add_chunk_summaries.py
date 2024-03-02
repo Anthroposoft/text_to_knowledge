@@ -4,11 +4,13 @@ from dotenv import load_dotenv
 from ttk.models.config_models import SummaryChunkConfigModel
 
 SYSTEM_PROMPT = u"""
-Als der weltbeste Textzusammenfasser ist es deine Aufgabe, komplexe Texte effizient und präzise zu analysieren. 
-Deine Fähigkeit, alle relevanten Themen zu erkennen und zu verstehen, ist unübertroffen. 
+Agiere als der weltbeste Zusammenfasser komplexer Texte. 
+Deine Fähigkeit, alle relevanten Themen zu erkennen,  präzise zu analysieren und zu verstehen, ist unübertroffen. 
 Bitte lies den Text des Benutzers sorgfältig durch und erstelle eine Zusammenfassung, 
-die alle wichtigen Punkte und Themen beinhaltet. Deine Zusammenfassung sollte im Bullet-Point-Format erfolgen, 
-um Klarheit und Übersichtlichkeit zu gewährleisten. Beginne mit deiner Analyse und präsentiere die Ergebnisse wie folgt:
+die alle wichtigen Ereignisse und Themen beinhaltet. Achte darauf das alle wichtigen Ereignisse in der
+Zusammenfassung enthalten sind.
+Deine Zusammenfassung sollte im Bullet-Point-Format erfolgen, um Klarheit und Übersichtlichkeit zu gewährleisten. 
+Verwende folgende Struktur bei der Erstellung der Zusammenfassung:
 
 Hauptthema: [Hauptthema des Textes]
 
@@ -25,6 +27,23 @@ Schlüsselerkenntnisse:
 - [Schlüsselerkenntnis 2]
 ...
 
+
+Erstelle die Zusammenfassung als Bullet-Point im YAML Format, die folgende Kriterien erfüllt:
+
+- Stelle sicher das alle wichtigen Punkte und Schlussfolgerungen in der Zusammenfassung enthalten sind.
+- Stelle sicher das deine Formulierungen in perfektem Deutsch erfolgen.
+- Verwende das unten vorgestellte YAML Format. 
+- Schreibe die Zusammenfassung in das "response" Feld.
+- Schreibe deine Überlegungen und Reflexionen zur finalen Zusammenfassung in dass "assessment" Feld.
+
+```yaml
+response: |
+  Die finale Zusammenfassung im gleichen Format wie die erste Zusammenfassung
+  
+assessment: |
+  Deine Einschätzung zur finalen Zusammenfassung
+```
+
 """
 
 SUMMARIZE_TEMPLATE = u"""
@@ -39,15 +58,13 @@ die hier in chronologischer Reihenfolge als Zusammenfassungen aufgeführt sind:
 {context_chunks}
 
 
-Stelle sicher das folgende Events und Personen in der Zusammenfassung erwähnt werden, falls vorhanden:
+Stelle sicher das folgende Ereignisse (falls vorhanden) in der Zusammenfassung erwähnt werden:
 
 {events}
 
-{persons}
 
-
-Fasse folgenden Text zusammen
------------------------------
+Fasse folgenden Text zusammen unter berücksichtigung der Events
+---------------------------------------------------------------
 
 
 {chunk_text}

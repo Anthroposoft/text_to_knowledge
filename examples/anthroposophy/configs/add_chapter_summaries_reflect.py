@@ -7,7 +7,8 @@ SYSTEM_PROMPT = u"""
 Als der weltbeste Textzusammenfasser ist es deine Aufgabe, komplexe Texte effizient und präzise zu analysieren. 
 Deine Fähigkeit, alle relevanten Themen zu erkennen und zu verstehen, ist unübertroffen. 
 Bitte lies den Text des Benutzers sorgfältig durch und erstelle eine Zusammenfassung, 
-die alle wichtigen Events und Themen beinhaltet. Deine Zusammenfassung sollte im Bullet-Point-Format erfolgen, 
+die alle wichtigen Ereignisse und Themen beinhaltet, reflektiere über diese und erstelle eine finale Zusammenfassung. 
+Deine Zusammenfassung sollte im Bullet-Point-Format erfolgen, 
 um Klarheit und Übersichtlichkeit zu gewährleisten. 
 Präsentiere die Ergebnisse wie folgt:
 
@@ -27,11 +28,11 @@ Schlüsselerkenntnisse:
 ...
 
 
-Nachdem du diese erste Zusammenfassung erstellt hast, möchte ich, dass du über die von dir präsentierten 
-Informationen reflektierst. Überlege, wie du die Zusammenfassung weiter verbessern kannst. Erstelle eine zweite, 
-verbesserte Version der Zusammenfassung, die folgende Kriterien erfüllt:
+Nachdem du diese erste Zusammenfassung als einfachen Text erstellt hast, möchte ich, dass du über die von dir präsentierten 
+Informationen reflektierst! Überlege, wie du die Zusammenfassung weiter verbessern kannst. Erstelle dann eine zweite, 
+verbesserte Version der Zusammenfassung im YAML Format, die folgende Kriterien erfüllt:
 
-- Halte die Informationen prägnant und auf den Punkt gebracht.
+- Stelle sicher das alle wichtigen Punkte und Schlussfolgerungen in der Zusammenfassung enthalten sind.
 - Verwende das unten vorgestellte YAML Format. 
 - Schreibe die Zusammenfassung in das "response" Feld.
 - Schreibe deine Überlegungen und Reflexionen zur finalen Zusammenfassung in dass "assessment" Feld.
@@ -47,18 +48,14 @@ assessment: |
 """
 
 SUMMARIZE_TEMPLATE = u"""
-Der zu zusammenfassende Text ist das Kapitel '{chapter}' des Buches '{book_title}'. 
-Der/die Autor(en) ist/sind {authors}.
-
-
-Stelle sicher das folgende Events Zusammenfassung behandelt werden
+Beachte folgende Ereignisse, wenn du die Zusammenfassung erstellst
 ------------------------------------------------------------------
 
 {events}
 
 
-Fasse folgenden Text zusammen unter berücksichtigung der Events
----------------------------------------------------------------
+Fasse folgendes Kapitel '{chapter}' des Buches '{book_title}' von Autor {authors} zusammen:
+
 
 
 {chapter_text}
@@ -73,7 +70,7 @@ config.user_prompt = SUMMARIZE_TEMPLATE
 config.num_context_chunks = 5
 config.num_summaries = 1
 config.sleep_time_between_api_calls = 1
-config.name = "summaries_reflected_1"
+config.name = "summaries_reflected_3"
 config.context = "Erzeuge Kapitel Zusammenfassungen als Bullet-Points für Text-Absätze"
 
 # config.model = "mistralai/Mixtral-8x7B-Instruct-v0.1"

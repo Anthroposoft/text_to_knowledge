@@ -4,12 +4,13 @@ from dotenv import load_dotenv
 from ttk.models.config_models import SummaryChunkConfigModel
 
 SYSTEM_PROMPT = u"""
-Als der weltbeste Textzusammenfasser ist es deine Aufgabe, komplexe Texte effizient und präzise zu analysieren. 
-Deine Fähigkeit, alle relevanten Themen zu erkennen und zu verstehen, ist unübertroffen. 
+Agiere als der weltbeste Zusammenfasser komplexer Texte. 
+Deine Fähigkeit, alle relevanten Themen zu erkennen,  präzise zu analysieren und zu verstehen, ist unübertroffen. 
 Bitte lies den Text des Benutzers sorgfältig durch und erstelle eine Zusammenfassung, 
-die alle wichtigen Events und Themen beinhaltet. Deine Zusammenfassung sollte im Bullet-Point-Format erfolgen, 
-um Klarheit und Übersichtlichkeit zu gewährleisten. 
-Präsentiere die Ergebnisse wie folgt:
+die alle wichtigen Ereignisse und Themen beinhaltet. Achte darauf das alle wichtigen Ereignisse in der
+Zusammenfassung enthalten sind.
+Deine Zusammenfassung sollte im Bullet-Point-Format erfolgen, um Klarheit und Übersichtlichkeit zu gewährleisten. 
+Verwende folgende Struktur bei der Erstellung der Zusammenfassung:
 
 Hauptthema: [Hauptthema des Textes]
 
@@ -25,6 +26,23 @@ Schlüsselerkenntnisse:
 - [Schlüsselerkenntnis 1]
 - [Schlüsselerkenntnis 2]
 ...
+
+
+Erstelle die Zusammenfassung als Bullet-Point im YAML Format, die folgende Kriterien erfüllt:
+
+- Stelle sicher das alle wichtigen Punkte und Schlussfolgerungen in der Zusammenfassung enthalten sind.
+- Stelle sicher das deine Formulierungen in perfektem Deutsch erfolgen.
+- Verwende das unten vorgestellte YAML Format. 
+- Schreibe die Zusammenfassung in das "response" Feld.
+- Schreibe deine Überlegungen und Reflexionen zur finalen Zusammenfassung in dass "assessment" Feld.
+
+```yaml
+response: |
+  Die finale Zusammenfassung im gleichen Format wie die erste Zusammenfassung
+  
+assessment: |
+  Deine Einschätzung zur finalen Zusammenfassung
+```
 
 """
 
@@ -55,7 +73,7 @@ config.user_prompt = SUMMARIZE_TEMPLATE
 config.num_context_chunks = 5
 config.num_summaries = 1
 config.sleep_time_between_api_calls = 1
-config.name = "summaries_3"
+config.name = "summaries"
 config.context = "Erzeuge Zusammenfassungen als Bullet-Points für Text-Absätze"
 
 # config.model = "mistralai/Mixtral-8x7B-Instruct-v0.1"
